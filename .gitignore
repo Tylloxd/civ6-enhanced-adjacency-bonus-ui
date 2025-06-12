@@ -1,0 +1,30 @@
+# Civilization VI Mod .gitignore
+
+# Game-specific files
+*.cache
+*.log
+
+# Development files
+.vscode/
+.idea/
+*.tmp
+*.temp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*~
+
+# Archive files (if any)
+*.zip
+*.rar
+*.7z
+
+# Personal notes or drafts
+NOTES.md
+DRAFT_* 

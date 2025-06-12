@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="f1e5c8d2-a4b6-4c7d-8e9f-1a2b3c4d5e6f" version="1">
+  <Properties>
+    <Name>District Reverse Adjacency Enhancement</Name>
+    <Authors>AI Assistant + User</Authors>
+    <Teaser>Display reverse adjacency bonuses when placing districts.</Teaser>
+    <Description>Enhances the district placement UI by showing the adjacency bonuses that the new district would provide to existing districts in the city. Shows a mock +9 Faith bonus to demonstrate the enhancement technique that can be adapted for real reverse adjacency calculations.</Description>
+    <AffectsSavedGames>0</AffectsSavedGames>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+
+  <InGameActions>
+    <ReplaceUIScript id="districtploticonmanager">
+      <Properties>
+        <LoadOrder>12345</LoadOrder>
+        <LuaContext>DistrictPlotIconManager</LuaContext>
+        <LuaReplace>UI/DistrictPlotIconManager_ReverseAdjacency.lua</LuaReplace>
+      </Properties>
+    </ReplaceUIScript>
+    <ImportFiles id="reverseadjacency_files">
+      <Properties><LoadOrder>12345</LoadOrder></Properties>
+      <File>Data/ReverseAdjacencyConfig.lua</File>
+      <File>UI/DistrictPlotIconManager_ReverseAdjacency.lua</File>
+    </ImportFiles>
+  </InGameActions>
+
+  <Files>
+    <File>Data/ReverseAdjacencyConfig.lua</File>
+    <File>UI/DistrictPlotIconManager_ReverseAdjacency.lua</File>
+  </Files>
+</Mod> 
