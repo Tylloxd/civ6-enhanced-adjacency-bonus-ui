@@ -2,13 +2,17 @@
 
 A Civilization VI mod that enhances the district placement interface by displaying reverse adjacency bonuses - showing the benefits that the new district would provide to existing districts in your city.
 
+## ⚠️ **IMPORTANT: This mod uses MOCK DATA for demonstration purposes**
+
+**This mod does NOT provide real reverse adjacency calculations.** It displays a mock "+9 Faith" bonus to demonstrate the UI enhancement technique. This is a **proof-of-concept framework** designed for developers who want to integrate actual reverse adjacency calculation logic.
+
 ## 🎯 What This Mod Does
 
-When placing a district in Civilization VI, the game normally shows you the adjacency bonuses that the new district would receive from surrounding tiles. This mod **adds** information about the reverse adjacency bonuses - the benefits your new district would provide to existing districts.
+When placing a district in Civilization VI, the game normally shows you the adjacency bonuses that the new district would receive from surrounding tiles. This mod **adds** a visual framework for displaying reverse adjacency bonuses - the benefits your new district would provide to existing districts.
 
-### Before vs After
+### Before vs After (Mock Data Example)
 - **Before**: See only "+2 Gold from River" when placing a Commercial Hub
-- **After**: See "+2 Gold from River, +9 Faith" - now including the reverse bonus
+- **After**: See "+2 Gold from River, +9 Faith" - demonstrating where reverse bonus would appear
 
 ## ✨ Features
 
@@ -17,7 +21,8 @@ When placing a district in Civilization VI, the game normally shows you the adja
 - **All Districts**: Works with every district type
 - **Edge Case Handling**: Functions whether or not base adjacency bonuses exist
 - **Tooltip Support**: Enhanced tooltips with detailed information
-- **Mock Data**: Demonstrates +9 Faith bonus (easily replaceable with real calculations)
+- **Mock Data Framework**: Demonstrates +9 Faith bonus (easily replaceable with real calculations)
+- **Developer-Ready**: Clear integration points for actual reverse adjacency algorithms
 
 ## 🚀 Installation
 
@@ -79,13 +84,74 @@ See the `/tasks/` folder for detailed development documentation.
 - **[Modding Knowledge Base](CIV6_MODDING_KNOWLEDGE_BASE.md)** - General Civ 6 modding reference
 - **[AI Instructions](AI_INSTRUCTIONS.md)** - Development guidelines used during creation
 
-## 🎯 Future Enhancement
+## 🔧 Developer Integration Guide
 
-This mod uses mock data (+9 Faith) to demonstrate the enhancement technique. The structure is designed to easily integrate with actual reverse adjacency calculation logic:
+**For developers with actual reverse adjacency algorithms:** This mod provides a complete visual framework. Here's exactly how to integrate your calculations:
 
-1. Replace `GetMockReverseAdjacencyBonus()` function
-2. Add real calculation logic for district-to-district bonuses
-3. Customize bonus amounts based on actual game rules
+### Step 1: Replace the Mock Function
+In `Data/ReverseAdjacencyConfig.lua`, replace the `GetMockReverseAdjacencyBonus()` function:
+
+```lua
+function GetMockReverseAdjacencyBonus(districtType, pCity, kPlot)
+    -- REPLACE THIS SECTION WITH YOUR ALGORITHM
+    -- You have access to:
+    -- - districtType: District being placed (e.g., GameInfo.Districts["DISTRICT_CAMPUS"].Index)
+    -- - pCity: City object with all city data
+    -- - kPlot: Plot object where district would be placed
+    
+    -- YOUR CALCULATION HERE
+    local calculatedYields = YourReverseAdjacencyCalculation(districtType, pCity, kPlot);
+    
+    -- Format for display (supports multiple yields)
+    local bonusString = FormatYieldsForDisplay(calculatedYields);
+    local bonusTooltip = CreateTooltipText(calculatedYields);
+    
+    return bonusString, bonusTooltip;
+end
+```
+
+### Step 2: Yield Formatting Helper
+Use this format for multiple yield types:
+
+```lua
+function FormatYieldsForDisplay(yields)
+    local result = "";
+    for yieldType, amount in pairs(yields) do
+        if amount > 0 then
+            local yieldInfo = GameInfo.Yields[yieldType];
+            local iconName = "ICON_" .. yieldInfo.YieldType;
+            local colorStyle = "Res" .. yieldInfo.YieldType .. "LabelCS";
+            
+            if result ~= "" then result = result .. ", "; end
+            result = result .. "[" .. iconName .. "][COLOR:" .. colorStyle .. "]+" .. amount .. "[ENDCOLOR]";
+        end
+    end
+    return result;
+end
+```
+
+### Step 3: Conditional Display Logic
+Modify `ShouldShowReverseAdjacencyBonus()` to control when bonuses appear:
+
+```lua
+function ShouldShowReverseAdjacencyBonus(districtType, pCity, kPlot)
+    -- Add your conditions:
+    -- - Check if adjacent districts exist that would benefit
+    -- - Verify player has required technologies
+    -- - Filter by district types
+    return YourConditionLogic(districtType, pCity, kPlot);
+end
+```
+
+### Integration Points Summary
+- **Visual System**: Already complete - no UI work needed
+- **Hook Point**: `GetAdjacentYieldBonusString` function in DistrictPlotIconManager
+- **Data Source**: Replace functions in `ReverseAdjacencyConfig.lua`
+- **Format**: Standard Civ 6 yield string format (automatically styled)
+
+## 🎯 Mock Data Notice
+
+This mod currently uses mock data (+9 Faith) to demonstrate the enhancement technique. **It does not affect actual gameplay** - it only shows where reverse adjacency information would appear.
 
 ## 🤝 Contributing
 

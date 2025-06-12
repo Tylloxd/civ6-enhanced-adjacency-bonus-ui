@@ -1,7 +1,14 @@
 -- =======================================================================
 --  Reverse Adjacency Configuration for District Placement Enhancement
---  This file contains mock data for demonstrating reverse adjacency bonuses
---  Replace this configuration with actual calculation logic as needed
+--  
+--  ⚠️  IMPORTANT: This file contains MOCK DATA for demonstration purposes!
+--  
+--  This mod does NOT provide real reverse adjacency calculations.
+--  It displays a mock "+9 Faith" bonus to demonstrate the UI framework.
+--  
+--  🔧 FOR DEVELOPERS: Replace the functions below with your actual 
+--      reverse adjacency calculation logic to integrate with this 
+--      working visual system.
 -- =======================================================================
 
 print("Loading ReverseAdjacencyConfig.lua");
@@ -22,17 +29,25 @@ local MOCK_REVERSE_BONUS = {
 -- Public Functions
 -- =======================================================================
 
--- Get the mock reverse adjacency bonus for any district placement
--- This is where you would integrate actual reverse adjacency calculation logic
+-- 🔧 DEVELOPER INTEGRATION POINT #1: Replace this function with your algorithm
+-- 
+-- Get reverse adjacency bonus for any district placement
+-- 
+-- This function is called every time a district placement shows adjacency bonuses.
+-- Replace the mock logic below with your actual reverse adjacency calculations.
 --
 -- Params:
---     districtType: The type of district being placed
---     pCity: The city where the district is being placed  
---     kPlot: The plot where the district is being placed
+--     districtType: The type of district being placed (number/hash)
+--     pCity: The city object where the district is being placed  
+--     kPlot: The plot object where the district is being placed
 -- Return: 
 --     bonusString: Formatted string for display (e.g., "[ICON_Faith][COLOR:ResFaithLabelCS]+9[ENDCOLOR]")
 --     bonusTooltip: Tooltip text explaining the bonus (optional)
+--
+-- Example for multiple yields:
+-- bonusString = "[ICON_Science]+2[ENDCOLOR], [ICON_Culture]+1[ENDCOLOR]"
 function GetMockReverseAdjacencyBonus(districtType, pCity, kPlot)
+    -- 🚨 MOCK DATA - REPLACE WITH YOUR CALCULATION LOGIC 🚨
     local bonusString = "[" .. MOCK_REVERSE_BONUS.Icon .. "]" ..
                        "[COLOR:" .. MOCK_REVERSE_BONUS.ColorStyle .. "]" ..
                        "+" .. tostring(MOCK_REVERSE_BONUS.Amount) ..
@@ -44,21 +59,26 @@ function GetMockReverseAdjacencyBonus(districtType, pCity, kPlot)
     return bonusString, bonusTooltip;
 end
 
+-- 🔧 DEVELOPER INTEGRATION POINT #2: Add conditional logic here
+--
 -- Check if reverse adjacency bonuses should be shown for this district placement
--- You can add logic here to conditionally show/hide reverse bonuses
+-- Add your own logic to control when reverse bonuses appear
 --
 -- Params:
---     districtType: The type of district being placed
---     pCity: The city where the district is being placed
---     kPlot: The plot where the district is being placed  
+--     districtType: The type of district being placed (number/hash)
+--     pCity: The city object where the district is being placed
+--     kPlot: The plot object where the district is being placed  
 -- Return:
 --     boolean: true if reverse bonuses should be displayed
 function ShouldShowReverseAdjacencyBonus(districtType, pCity, kPlot)
-    -- For demonstration, always show the mock bonus
-    -- You could add conditions here, such as:
+    -- 🚨 MOCK LOGIC - REPLACE WITH YOUR CONDITIONS 🚨
+    -- Current: Always show mock bonus for demonstration
+    -- 
+    -- Examples of conditions you might add:
     -- - Only show for certain district types
-    -- - Only show if there are adjacent districts that would benefit
+    -- - Only show if there are adjacent districts that would benefit  
     -- - Only show if the player has certain technologies/civics
+    -- - Only show if the calculated bonus is > 0
     return true;
 end
 

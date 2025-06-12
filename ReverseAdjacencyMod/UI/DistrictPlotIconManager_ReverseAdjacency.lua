@@ -39,8 +39,13 @@ BASE_GetAdjacentYieldBonusString = GetAdjacentYieldBonusString;
 -- Enhanced Functions
 -- =======================================================================
 
+-- 🎯 MAIN INTEGRATION POINT: This function hooks into the game's district placement system
+-- 
 -- Override GetAdjacentYieldBonusString to include reverse adjacency bonuses
--- This is called by the district placement system to get yield bonus text
+-- This is automatically called by the district placement system to get yield bonus text
+-- 
+-- 📋 DEVELOPER NOTE: You don't need to modify this function - it automatically calls
+--    your functions in ReverseAdjacencyConfig.lua to get the actual bonus data
 --
 -- Params:
 --     districtType: The district type index or hash
