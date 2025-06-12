@@ -2,6 +2,8 @@
 
 A Civilization VI mod that enhances the district placement interface by displaying reverse adjacency bonuses - showing the benefits that the new district would provide to existing districts in your city.
 
+Note: This was made by prompting through Cursor with Claude Sonnet 4.
+
 ## ⚠️ **IMPORTANT: This mod uses MOCK DATA for demonstration purposes**
 
 **This mod does NOT provide real reverse adjacency calculations.** It displays a mock "+9 Faith" bonus to demonstrate the UI enhancement technique. This is a **proof-of-concept framework** designed for developers who want to integrate actual reverse adjacency calculation logic.
@@ -13,6 +15,18 @@ When placing a district in Civilization VI, the game normally shows you the adja
 ### Before vs After (Mock Data Example)
 - **Before**: See only "+2 Gold from River" when placing a Commercial Hub
 - **After**: See "+2 Gold from River, +9 Faith" - demonstrating where reverse bonus would appear
+
+<p align="center">
+  <img src="EAB-UI-Tiles.png" alt="In-game tile UI showing reverse adjacency bonus" width="600" />
+  <br/>
+  <em>In-game: District placement view showing the reverse adjacency bonus (+9 Faith) on tiles.</em>
+</p>
+
+<p align="center">
+  <img src="EAB-UI-Tooltip.png" alt="Tooltip showing detailed reverse adjacency bonus" width="600" />
+  <br/>
+  <em>In-game: Tooltip with detailed information about the reverse adjacency bonus.</em>
+</p>
 
 ## ✨ Features
 
